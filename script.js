@@ -34,8 +34,9 @@ const drawAudio = url => {
  * @returns {Array} an array of floating point numbers
  */
 const filterData = audioBuffer => {
+  console.log(audioBuffer);
   const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
-  const samples = 70; // Number of samples we want to have in our final data set
+  const samples = 350; // Number of samples we want to have in our final data set
   const blockSize = Math.floor(rawData.length / samples); // the number of samples in each subdivision
   const filteredData = [];
   for (let i = 0; i < samples; i++) {
@@ -85,7 +86,9 @@ const draw = normalizedData => {
     } else if (height > canvas.offsetHeight / 2) {
         height = height > canvas.offsetHeight / 2;
     }
-    drawLineSegment(ctx, x, height, width, (i + 1) % 2);
+    drawLineSegment(ctx, x, height, width, (i + 1) % 2,i);
+  
+
   }
 };
 
@@ -97,16 +100,29 @@ const draw = normalizedData => {
  * @param {number} width the desired width of the line segment
  * @param {boolean} isEven whether or not the segmented is even-numbered
  */
-const drawLineSegment = (ctx, x, height, width, isEven) => {
-  ctx.lineWidth = 1; // how thick the line is
-  ctx.strokeStyle = "red"; // what color our line is
-  ctx.beginPath();
-  height = isEven ? height : -height;
-  ctx.moveTo(x, 0);
-  ctx.lineTo(x, height);
-  ctx.arc(x + width / 2, height, width / 2, Math.PI, 0, isEven);
-  ctx.lineTo(x + width, 0);
-  ctx.stroke();
+const drawLineSegment = (ctx, x,
+  height,
+  width, isEven,
+  color) => {
+  
+    if(color>180){
+      ctx.strokeStyle="red"
+    }
+    else{
+      ctx.strokeStyle="white"
+    }
+    height = isEven ? height : -height;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x, -height);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  
 };
 
-drawAudio('./882e74e4118ff2552d633f3c47b5d8f7.mp3');
+ drawAudio('1mb.mp3');
+ 
+ const progress=document.getElementById('progress');
+ progress.addEventListener('change',(e)=>{
+  console.log(progress.value);
+ })

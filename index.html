@@ -2,15 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <audio  controls src="./882e74e4118ff2552d633f3c47b5d8f7.mp3"></audio>
 
-    <canvas></canvas>
+    <!-- <audio  controls src="https://beats-api.onrender.com/song/play/882e74e4118ff2552d633f3c47b5d8f7.mp3"></audio>
+    <canvas></canvas> -->
+    <div class="container d-flex justify-content-center align-items-center ">
+        <div class="controls shadow d-flex flex-column align-items-center  ">
+            <div class="image-container mt-5 mb-2">
+                <div class="image-wrapper">
+                    <div>
+                        <img src="./run.jpeg" class="image-cover shadow">
+                    </div>
+                </div>
+            </div>
+            <div class=>
+                <div class=" controls-details mt">
+                    <span class="controls-cover shadow"></span>
+                    <span class="controls-name">Nice For What</span>
+                </div>
+                <div class=" controls-btn d-flex justify-content-center gap-3 mt-4">
+                    <div class=""><i class="far fa-heart"></i></div>
+                    <div class=" play-btn"><i class="far fa-play" id="paused"  ></i></div>
+                    <div class=""><i class="far fa-repeat"></i></div>
+                </div>
+                <div class="position-absolute d-flex justify-content-center align-items-center progress-details px-2 gap-1">
+                    <div>00:00</div> <canvas class="flex-grow-1"></canvas>  <div>01:20</div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="./script.js"></script>
 </body>

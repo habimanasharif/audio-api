@@ -1,9 +1,58 @@
-body {
-    background: #282831;
+body{
+    background-image:url("./body-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(50px);
+    background-position: center;
+    color:#fff
+    
 }
 
 canvas {
-    width: 800px;
-    height: 130px;
+    width: 100px;
+    height: 50px;
     margin: 2rem auto;
+}
+.container{
+    height: 100vh;
+}
+.controls{
+    height: 50%;
+    filter:blur(0px) saturate(180%) ;
+    background-color:rgba(20, 23, 42, 0.9) ;
+    border-radius: 2rem;
+    width: 30%;
+}
+.fas,i{
+    color:#fff;
+}
+.image-container{
+  width: 10rem;
+  height: 10rem;
+  
+
+}
+.image-wrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 1rem;
+}
+.image-cover{
+    width: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 1rem;
+
+}
+.progress-details{
+    background-color:rgba(20, 23, 42) ;
+    height: 2.5rem;
+    width: 80%;
+    left:10%;
+    bottom:-1rem;
+    border-radius: 1rem;
 }
