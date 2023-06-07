@@ -1,17 +1,3 @@
-/*
-    This is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
 
 // Set up audio context
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -21,11 +7,11 @@ const audioContext = new AudioContext();
  * Retrieves audio from an external source, the initializes the drawing function
  * @param {String} url the url of the audio we'd like to fetch
  */
-const drawAudio = url => {
+const drawAudio = (url,number) => {
   fetch(url)
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-    .then(audioBuffer => draw(normalizeData(filterData(audioBuffer))));
+    .then(audioBuffer => draw(normalizeData(filterData(audioBuffer)),number));
 };
 
 /**
@@ -34,9 +20,8 @@ const drawAudio = url => {
  * @returns {Array} an array of floating point numbers
  */
 const filterData = audioBuffer => {
-  console.log(audioBuffer);
   const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
-  const samples = 350; // Number of samples we want to have in our final data set
+  const samples = 70; // Number of samples we want to have in our final data set
   const blockSize = Math.floor(rawData.length / samples); // the number of samples in each subdivision
   const filteredData = [];
   for (let i = 0; i < samples; i++) {
@@ -65,7 +50,7 @@ const normalizeData = filteredData => {
  * @param {Array} normalizedData The filtered array returned from filterData()
  * @returns {Array} a normalized array of data
  */
-const draw = normalizedData => {
+const draw =( normalizedData,number )=> {
   // set up the canvas
   const canvas = document.querySelector("canvas");
   const dpr = window.devicePixelRatio || 1;
@@ -86,7 +71,7 @@ const draw = normalizedData => {
     } else if (height > canvas.offsetHeight / 2) {
         height = height > canvas.offsetHeight / 2;
     }
-    drawLineSegment(ctx, x, height, width, (i + 1) % 2,i);
+    drawLineSegment(ctx, x, height, width, (i + 1) % 2,i,number);
   
 
   }
@@ -103,9 +88,9 @@ const draw = normalizedData => {
 const drawLineSegment = (ctx, x,
   height,
   width, isEven,
-  color) => {
+  color,number) => {
   
-    if(color>180){
+    if(color<number){
       ctx.strokeStyle="red"
     }
     else{
@@ -120,9 +105,27 @@ const drawLineSegment = (ctx, x,
   
 };
 
- drawAudio('1mb.mp3');
+ drawAudio('1mb.mp3',0);
  
- const progress=document.getElementById('progress');
- progress.addEventListener('change',(e)=>{
-  console.log(progress.value);
+ const play=document.getElementById("play");
+ const audio=document.querySelector("audio");
+ play.addEventListener('click',(e)=>{
+  e.preventDefault()
+  const playIcon=document.getElementById("paused");
+  if(playIcon.classList[1]==="fa-play")
+  {
+    playIcon.classList.add("fa-pause");
+    playIcon.classList.remove("fa-play")
+    audio.play();
+  }else{
+    playIcon.classList.add("fa-play");
+    playIcon.classList.remove("fa-pause")
+    audio.pause();
+  }
+     
  })
+ audio.addEventListener('timeupdate',(e)=>{
+  const { currentTime,duration } = e.srcElement;
+  drawAudio('1mb.mp3',Math.floor((currentTime / duration) * 70) + 1);
+ })
+

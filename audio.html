@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html> 
+<body> 
+
+<audio id="myAudio" controls>
+  <source src="https://beats-api.onrender.com/song/play/4239987637a9253ac047e33b3e628417.mpeg" type="audio/ogg">
+  <source src="https://beats-api.onrender.com/song/play/4239987637a9253ac047e33b3e628417.mpeg" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio><br>
+
+<button onclick="getCurTime()" type="button">Get current time position</button>
+<button onclick="setCurTime()" type="button">Set time position to 1 second</button>
+
+<script>
+var x = document.getElementById("myAudio");
+function getCurTime() { 
+  alert(x.currentTime);
+} 
+
+function setCurTime() { 
+  x.currentTime = 100;
+} 
+</script> 
+
+</body> 
+</html>
