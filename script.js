@@ -126,6 +126,6 @@ const drawLineSegment = (ctx, x,
  })
  audio.addEventListener('timeupdate',(e)=>{
   const { currentTime,duration } = e.srcElement;
-  drawAudio('1mb.mp3',Math.floor((currentTime / duration) * 70) + 1);
+  drawAudio('song.mp3',Math.floor((currentTime / duration) * 70) + 1);
  })
 
